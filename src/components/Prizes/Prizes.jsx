@@ -103,7 +103,6 @@ const PrizeCard = ({ tier, registerRef }) => {
         style={{
           rotateX,
           rotateY,
-          transformStyle: 'preserve-3d',
         }}
       >
         <motion.div className="prizes__device-glint" style={{ background, opacity: isHovered ? 1 : 0 }} />
@@ -126,7 +125,7 @@ const PrizeCard = ({ tier, registerRef }) => {
         {/* Inner CRT Screen */}
         <div className="prizes__screen">
           <div className="prizes__screen-scanlines"></div>
-          <div className="prizes__screen-content" style={{ transform: 'translateZ(20px)' }}>
+          <div className="prizes__screen-content">
             {/* Tech Badge */}
             <div className="prizes__tech-badge">
               <span className="bracket">[</span> TIER // {tier.rankNumber} <span className="bracket">]</span>
