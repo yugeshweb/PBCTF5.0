@@ -1,0 +1,19 @@
+.cyber-core-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: var(--z-3d, 0);
+  pointer-events: none;
+}
+
+.cyber-core-container--mobile {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .cyber-core-container {
+    opacity: 0.4;
+  }
+}

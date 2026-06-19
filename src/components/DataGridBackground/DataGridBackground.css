@@ -1,0 +1,96 @@
+/* ===================================================================
+   DataGridBackground — Secondary immersive background
+   =================================================================== */
+
+.data-grid-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--bg);
+  overflow: hidden;
+  opacity: 0; /* Updated via JS */
+  will-change: opacity;
+}
+
+/* --- Floor Perspective Grid --- */
+.data-grid__perspective {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: -20vh;
+  height: 100vh;
+  perspective: 1000px;
+  transform: rotateX(75deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+.data-grid__plane {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: grid-move 5s linear infinite;
+}
+
+@keyframes grid-move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(80px); }
+}
+
+/* --- Interactive Mouse Glow --- */
+.data-grid__glow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, rgba(0, 255, 136, 0) 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* --- Floating Data Particles --- */
+.data-grid__particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-glow);
+  opacity: 0;
+  animation: particle-float infinite ease-in;
+  will-change: transform, opacity;
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  20% { opacity: 0.6; scale: 1; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+}
+
+/* --- Mobile specific tuning --- */
+@media (max-width: 768px) {
+  .data-grid__glow {
+    width: 600px;
+    height: 600px;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    animation: mobile-glow-pulse 8s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes mobile-glow-pulse {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8) !important; }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) !important; }
+}

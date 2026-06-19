@@ -1,0 +1,31 @@
+.traveling-dot {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 20px 5px var(--primary-glow);
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  opacity: 0; /* Managed by GSAP */
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%); /* Centered on its x/y coords */
+}
+
+/* Add a pulse effect to the dot */
+.traveling-dot::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  animation: dot-pulse 1.5s ease-out infinite;
+  opacity: 0;
+}
+
+@keyframes dot-pulse {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
